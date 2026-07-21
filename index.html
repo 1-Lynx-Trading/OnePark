@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>OnePark — The Living Blueprint for Sustainable Cities</title>
+<meta name="description" content="OnePark is a 500-acre regenerative park where renewable energy, restored wildland, and community life operate as one living system. Explore the future of sustainable urban space.">
+<meta name="theme-color" content="#0B3D2E">
+
+<!-- Preconnects -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Fraunces:ital,opsz,wght@1,9..144,300..600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+
+<!-- Favicon (inline SVG, contour-ring mark) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%2310B981' stroke-width='8'/%3E%3Ccircle cx='50' cy='50' r='22' fill='none' stroke='%23C6F135' stroke-width='8'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- ================= LOADER ================= -->
+<div id="loader" aria-hidden="true">
+  <svg class="loader__rings" viewBox="0 0 200 200" width="120" height="120">
+    <circle class="ring ring--1" cx="100" cy="100" r="30" />
+    <circle class="ring ring--2" cx="100" cy="100" r="52" />
+    <circle class="ring ring--3" cx="100" cy="100" r="74" />
+  </svg>
+  <p class="loader__label">Cultivating the experience</p>
+</div>
+
+<!-- ================= SKIP LINK ================= -->
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================= NOISE OVERLAY ================= -->
+<div class="noise" aria-hidden="true"></div>
+
+<!-- ================= CURSOR ================= -->
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+
+<!-- ================= PROGRESS BAR ================= -->
+<div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar" id="scrollProgressBar"></div></div>
+
+<!-- ================= NAVIGATION ================= -->
+<header class="nav" id="siteNav">
+  <div class="nav__inner">
+    <a href="#hero" class="nav__logo" aria-label="OnePark home">
+      <svg width="34" height="34" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="7" class="logo-ring-1"/>
+        <circle cx="50" cy="50" r="16" fill="currentColor" class="logo-dot"/>
+      </svg>
+      <span>OnePark</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <div class="nav__item has-mega">
+        <button class="nav__link" aria-expanded="false" aria-controls="megaExplore">Explore<svg class="chev" width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg></button>
+        <div class="mega" id="megaExplore">
+          <a href="#map" class="mega__item">
+            <span class="mega__num">01</span>
+            <div><strong>Park Map</strong><p>Wander the twelve living zones</p></div>
+          </a>
+          <a href="#sustainability" class="mega__item">
+            <span class="mega__num">02</span>
+            <div><strong>Systems</strong><p>Energy, water &amp; carbon infrastructure</p></div>
+          </a>
+          <a href="#ecosystem" class="mega__item">
+            <span class="mega__num">03</span>
+            <div><strong>Ecosystem</strong><p>200+ species call this home</p></div>
+          </a>
+          <a href="#innovation" class="mega__item">
+            <span class="mega__num">04</span>
+            <div><strong>Innovation</strong><p>The technology behind the calm</p></div>
+          </a>
+        </div>
+      </div>
+      <a href="#timeline" class="nav__link">Timeline</a>
+      <a href="#community" class="nav__link">Community</a>
+      <a href="#gallery" class="nav__link">Gallery</a>
+      <a href="#contact" class="nav__link">Visit</a>
+    </nav>
+
+    <div class="nav__actions">
+      <button class="icon-btn" id="searchToggle" aria-label="Search" aria-expanded="false" aria-controls="searchPanel">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="2"/><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8L6 18M18 6l1.8-1.8"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"><path stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+      </button>
+      <a href="#contact" class="btn btn--pill btn--ghost nav__cta">Plan a visit</a>
+      <button class="nav__burger" id="burgerToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Search panel -->
+  <div class="search-panel" id="searchPanel" hidden>
+    <div class="search-panel__inner">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="searchInput" placeholder="Search zones, programs, species…" autocomplete="off">
+      <kbd>Esc</kbd>
+    </div>
+    <ul class="search-panel__results" id="searchResults"></ul>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu" hidden>
+  <nav aria-label="Mobile primary">
+    <a href="#map">01 — Park Map</a>
+    <a href="#sustainability">02 — Systems</a>
+    <a href="#ecosystem">03 — Ecosystem</a>
+    <a href="#innovation">04 — Innovation</a>
+    <a href="#timeline">05 — Timeline</a>
+    <a href="#community">06 — Community</a>
+    <a href="#gallery">07 — Gallery</a>
+    <a href="#contact">08 — Visit</a>
+  </nav>
+  <a href="#contact" class="btn btn--pill btn--solid">Plan a visit</a>
+</div>
+
+<!-- Scroll-spy side rail -->
+<nav class="side-rail" id="sideRail" aria-label="Section progress">
+  <ol id="sideRailList"></ol>
+</nav>
+
+<main id="main">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="hero">
+    <canvas id="heroCanvas" aria-hidden="true"></canvas>
+    <svg class="hero__contours" id="heroContours" viewBox="0 0 1200 1200" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+      <!-- contour rings injected/animated via CSS+JS -->
+      <circle class="contour" cx="850" cy="600" r="120"/>
+      <circle class="contour" cx="850" cy="600" r="220"/>
+      <circle class="contour" cx="850" cy="600" r="320"/>
+      <circle class="contour" cx="850" cy="600" r="420"/>
+      <circle class="contour" cx="850" cy="600" r="520"/>
+      <circle class="contour" cx="850" cy="600" r="620"/>
+    </svg>
+
+    <div class="hero__content">
+      <p class="eyebrow reveal-up"><span class="eyebrow__dot"></span>500 acres · net-zero since 2024</p>
+      <h1 class="hero__title">
+        <span class="reveal-line"><span>Building the future</span></span>
+        <span class="reveal-line"><span>of sustainable <em>living</em></span></span>
+      </h1>
+      <p class="hero__sub reveal-up">OnePark fuses renewable infrastructure, restored wildland, and public life into a single working system — a city park that generates more energy than it spends and gives more back to the land than it takes.</p>
+      <div class="hero__actions reveal-up">
+        <a href="#map" class="btn btn--solid btn--magnetic">
+          <span>Walk the park</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <button class="btn btn--ghost btn--magnetic" id="playFilm">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M4 2.5v9l8-4.5-8-4.5Z" fill="currentColor"/></svg>
+          <span>Watch the film</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="hero__scroll-cue" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-cue__line"><i></i></div>
+    </div>
+
+    <div class="hero__weather" id="heroWeather" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" id="weatherIcon"><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.6"/></svg>
+      <span id="weatherText">Clear · 21°C · Golden hour in 2h</span>
+    </div>
+  </section>
+
+  <!-- ================= MARQUEE ================= -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Solar Plaza</span><span>·</span><span>Sky Walk</span><span>·</span><span>Nature Trails</span><span>·</span><span>Observation Tower</span><span>·</span><span>Urban Farm</span><span>·</span><span>Botanical Gardens</span><span>·</span>
+      <span>Solar Plaza</span><span>·</span><span>Sky Walk</span><span>·</span><span>Nature Trails</span><span>·</span><span>Observation Tower</span><span>·</span><span>Urban Farm</span><span>·</span><span>Botanical Gardens</span><span>·</span>
+    </div>
+  </div>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="about" id="about">
+    <div class="container about__grid">
+      <div class="about__label">
+        <span class="section-eyebrow">About OnePark</span>
+        <div class="about__visual" aria-hidden="true">
+          <svg viewBox="0 0 200 200" class="orbit-svg">
+            <circle cx="100" cy="100" r="70" class="orbit-ring"/>
+            <circle cx="100" cy="30" r="6" class="orbit-node orbit-node--1"/>
+            <circle cx="170" cy="100" r="4" class="orbit-node orbit-node--2"/>
+            <circle cx="100" cy="170" r="5" class="orbit-node orbit-node--3"/>
+          </svg>
+        </div>
+      </div>
+      <div class="about__copy">
+        <h2 class="about__heading reveal-up">One park. One connected system.<br>Nature, energy, and people <em>working together</em>.</h2>
+        <p class="reveal-up">OnePark began as a question: what if a park could do more than sit quietly in a city — what if it could power homes, clean water, restore habitat, and still feel like the calmest place you visit all week? Six years and 500 acres later, that question became an operating system for the land.</p>
+        <p class="reveal-up">Every path, structure, and planting bed here belongs to a single loop. Rain becomes irrigation. Sunlight becomes electricity. Fallen leaves become soil. Visitors become stewards. Nothing is decorative — the beauty is a byproduct of the function.</p>
+        <div class="about__cards">
+          <div class="about__card reveal-up">
+            <h3>Ecological</h3>
+            <p>112 restored acres of native forest, wetland, and prairie, home to over 200 documented species.</p>
+          </div>
+          <div class="about__card reveal-up">
+            <h3>Technological</h3>
+            <p>A live sensor mesh of 4,200 nodes reads soil, air, water, and canopy health every 90 seconds.</p>
+          </div>
+          <div class="about__card reveal-up">
+            <h3>Human</h3>
+            <p>5 million annual visitors, 60 community programs, and a research campus open to every school in the region.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SUSTAINABILITY SYSTEMS ================= -->
+  <section class="systems" id="sustainability">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow">Systems</span>
+        <h2 class="reveal-up">Fifteen systems.<br>One net-zero result.</h2>
+        <p class="section-head__sub reveal-up">Every card below is a working piece of infrastructure, not a display. Together they cover 100% of the park's energy, water, and waste needs — with surplus to share.</p>
+      </div>
+
+      <div class="systems__grid" id="systemsGrid">
+        <!-- cards injected by JS from data, see script.js SYSTEMS array -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INTERACTIVE MAP ================= -->
+  <section class="map-section" id="map">
+    <div class="container">
+      <div class="section-head section-head--light">
+        <span class="section-eyebrow">Wander the park</span>
+        <h2 class="reveal-up">Twelve zones.<br>One continuous trail.</h2>
+        <p class="section-head__sub reveal-up">Select a marker to preview each zone — or drag through them in order along the trail line.</p>
+      </div>
+
+      <div class="map-wrap">
+        <svg class="park-map" id="parkMap" viewBox="0 0 900 620" role="img" aria-label="Interactive map of OnePark's twelve zones">
+          <path class="park-map__trail" d="M60,520 C150,460 120,340 220,300 C320,260 300,150 420,140 C520,130 540,220 620,210 C700,200 690,110 800,90 C830,80 850,95 855,110" />
+          <!-- zone markers injected by JS -->
+        </svg>
+        <div class="map-card" id="mapCard" aria-live="polite">
+          <span class="map-card__eyebrow">Select a zone</span>
+          <h3 id="mapCardTitle">Explore OnePark</h3>
+          <p id="mapCardDesc">Hover or tap any marker on the trail to preview that zone — from the Botanical Gardens to the Observation Tower.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STATISTICS ================= -->
+  <section class="stats" id="stats">
+    <div class="container">
+      <div class="stats__grid">
+        <div class="stat">
+          <span class="stat__num" data-count="500" data-suffix="">0</span>
+          <span class="stat__label">Acres protected</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num" data-count="250" data-suffix="K">0</span>
+          <span class="stat__label">Trees planted</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num" data-count="5" data-suffix="M">0</span>
+          <span class="stat__label">Visitors a year</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num" data-count="100" data-suffix="%">0</span>
+          <span class="stat__label">Renewable energy</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num" data-count="0" data-suffix="">0</span>
+          <span class="stat__label">Net carbon emissions</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num" data-count="98" data-suffix="%">0</span>
+          <span class="stat__label">Water recycled</span>
+        </div>
+        <div class="stat">
+          <span class="stat__num" data-count="200" data-suffix="+">0</span>
+          <span class="stat__label">Wildlife species</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LIVE DASHBOARD ================= -->
+  <section class="dashboard" id="dashboard">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow">Live from the field</span>
+        <h2 class="reveal-up">The park, right now.</h2>
+        <p class="section-head__sub reveal-up">A simulated feed of the same telemetry our operations team watches — energy, water, air, and wildlife, refreshed continuously.</p>
+      </div>
+
+      <div class="dashboard__grid">
+        <article class="dash-card reveal-up">
+          <div class="dash-card__head">
+            <span>Solar output</span>
+            <span class="dash-card__value" id="dashSolar">—</span>
+          </div>
+          <canvas class="dash-card__chart" id="chartSolar" height="70"></canvas>
+          <p class="dash-card__foot">of 38 MW capacity</p>
+        </article>
+
+        <article class="dash-card reveal-up">
+          <div class="dash-card__head">
+            <span>Reservoir level</span>
+            <span class="dash-card__value" id="dashWater">—</span>
+          </div>
+          <canvas class="dash-card__chart" id="chartWater" height="70"></canvas>
+          <p class="dash-card__foot">40-acre lake capacity</p>
+        </article>
+
+        <article class="dash-card reveal-up">
+          <div class="dash-card__head">
+            <span>Air quality index</span>
+            <span class="dash-card__value" id="dashAir">—</span>
+          </div>
+          <canvas class="dash-card__chart" id="chartAir" height="70"></canvas>
+          <p class="dash-card__foot">good below 50</p>
+        </article>
+
+        <article class="dash-card dash-card--ticker reveal-up">
+          <div class="dash-card__head">
+            <span>Wildlife sightings</span>
+            <span class="dash-card__value dash-card__value--live"><i></i>Live</span>
+          </div>
+          <ul class="sighting-list" id="sightingList"></ul>
+        </article>
+      </div>
+
+      <div class="dashboard__controls reveal-up">
+        <div class="season-switch" role="group" aria-label="Preview seasonal appearance">
+          <span class="season-switch__label">Preview season</span>
+          <button data-season="spring" class="is-active">Spring</button>
+          <button data-season="summer">Summer</button>
+          <button data-season="autumn">Autumn</button>
+          <button data-season="winter">Winter</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TIMELINE ================= -->
+  <section class="timeline-section" id="timeline">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow">Timeline</span>
+        <h2 class="reveal-up">From reclaimed rail yard<br>to living system.</h2>
+      </div>
+
+      <div class="timeline" id="timelineList">
+        <div class="timeline__rail"><div class="timeline__rail-fill" id="timelineFill"></div></div>
+
+        <div class="timeline__item">
+          <div class="timeline__dot"></div>
+          <span class="timeline__year">2018</span>
+          <h3>A derelict rail yard</h3>
+          <p>140 acres of disused freight land is acquired by the city and set aside for public green space rather than development.</p>
+        </div>
+        <div class="timeline__item">
+          <div class="timeline__dot"></div>
+          <span class="timeline__year">2020</span>
+          <h3>Groundbreaking</h3>
+          <p>Soil remediation begins alongside the first native plantings; the solar canopy foundations go in before a single path is paved.</p>
+        </div>
+        <div class="timeline__item">
+          <div class="timeline__dot"></div>
+          <span class="timeline__year">2022</span>
+          <h3>First zones open</h3>
+          <p>The Botanical Gardens and Nature Trails welcome their first visitors while construction continues around them.</p>
+        </div>
+        <div class="timeline__item">
+          <div class="timeline__dot"></div>
+          <span class="timeline__year">2024</span>
+          <h3>Net zero achieved</h3>
+          <p>OnePark generates more energy than it consumes for the first time, six months ahead of schedule.</p>
+        </div>
+        <div class="timeline__item timeline__item--present">
+          <div class="timeline__dot"></div>
+          <span class="timeline__year">Today</span>
+          <h3>500 acres, fully connected</h3>
+          <p>Twelve zones, a research campus, and a sensor mesh spanning the entire park operate as one continuously learning system.</p>
+        </div>
+        <div class="timeline__item timeline__item--future">
+          <div class="timeline__dot"></div>
+          <span class="timeline__year">2028</span>
+          <h3>The next 300 acres</h3>
+          <p>Expansion into the adjoining floodplain will double wetland habitat and add a second research campus focused on climate-resilient agriculture.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ECOSYSTEM ================= -->
+  <section class="ecosystem" id="ecosystem">
+    <div class="container">
+      <div class="section-head section-head--light">
+        <span class="section-eyebrow">Ecosystem</span>
+        <h2 class="reveal-up">A home before it is a park.</h2>
+        <p class="section-head__sub reveal-up">Every structure at OnePark was sited around what was already living here — then built to bring more of it back.</p>
+      </div>
+
+      <div class="ecosystem__tabs" role="tablist" aria-label="Ecosystem categories">
+        <button class="eco-tab is-active" role="tab" aria-selected="true" data-tab="fauna">Fauna</button>
+        <button class="eco-tab" role="tab" aria-selected="false" data-tab="flora">Flora</button>
+        <button class="eco-tab" role="tab" aria-selected="false" data-tab="water">Waterways</button>
+        <button class="eco-tab" role="tab" aria-selected="false" data-tab="climate">Climate impact</button>
+      </div>
+
+      <div class="ecosystem__panels" id="ecoPanels">
+        <!-- panels injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INNOVATION ================= -->
+  <section class="innovation" id="innovation">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow">Innovation</span>
+        <h2 class="reveal-up">The quiet machinery<br>behind the calm.</h2>
+        <p class="section-head__sub reveal-up">None of it is visible from the trail. All of it is why the trail stays healthy.</p>
+      </div>
+
+      <div class="innovation__grid">
+        <article class="innovation__feature reveal-up">
+          <div class="innovation__feature-visual">
+            <svg viewBox="0 0 300 200" class="digital-twin-svg" aria-hidden="true">
+              <g class="dt-grid">
+                <line x1="0" y1="40" x2="300" y2="40"/><line x1="0" y1="80" x2="300" y2="80"/><line x1="0" y1="120" x2="300" y2="120"/><line x1="0" y1="160" x2="300" y2="160"/>
+                <line x1="50" y1="0" x2="50" y2="200"/><line x1="110" y1="0" x2="110" y2="200"/><line x1="170" y1="0" x2="170" y2="200"/><line x1="230" y1="0" x2="230" y2="200"/><line x1="290" y1="0" x2="290" y2="200"/>
+              </g>
+              <circle class="dt-node" cx="110" cy="80" r="4"/>
+              <circle class="dt-node" cx="170" cy="120" r="4"/>
+              <circle class="dt-node" cx="230" cy="40" r="4"/>
+              <circle class="dt-node" cx="50" cy="160" r="4"/>
+              <path class="dt-path" d="M110,80 L170,120 L230,40" fill="none"/>
+            </svg>
+          </div>
+          <h3>A living digital twin</h3>
+          <p>Every tree, sensor, and structure in OnePark exists as a real-time model. Planners test irrigation changes, storm scenarios, and canopy growth in simulation before touching a single acre of real ground.</p>
+        </article>
+
+        <article class="innovation__feature reveal-up">
+          <div class="innovation__feature-visual innovation__feature-visual--sensor">
+            <svg viewBox="0 0 300 200" aria-hidden="true">
+              <circle class="sensor-pulse" cx="150" cy="100" r="10"/>
+              <circle class="sensor-pulse sensor-pulse--delay1" cx="150" cy="100" r="10"/>
+              <circle class="sensor-pulse sensor-pulse--delay2" cx="150" cy="100" r="10"/>
+              <circle cx="150" cy="100" r="6" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>4,200 environmental sensors</h3>
+          <p>Soil moisture, canopy temperature, air quality, and water table depth are read every 90 seconds across the full 500 acres, feeding irrigation and energy systems automatically.</p>
+        </article>
+
+        <article class="innovation__feature reveal-up">
+          <div class="innovation__feature-visual">
+            <svg viewBox="0 0 300 200" aria-hidden="true">
+              <path class="drone-path" d="M20,160 Q100,20 150,100 T280,40" fill="none"/>
+              <circle class="drone-dot" r="5"><animateMotion dur="6s" repeatCount="indefinite" path="M20,160 Q100,20 150,100 T280,40"/></circle>
+            </svg>
+          </div>
+          <h3>Autonomous canopy drones</h3>
+          <p>A fleet of six drones surveys canopy health and wildlife activity weekly, flagging stress or disease long before it's visible from the ground.</p>
+        </article>
+
+        <article class="innovation__feature reveal-up">
+          <div class="innovation__feature-visual innovation__feature-visual--battery">
+            <svg viewBox="0 0 300 200" aria-hidden="true">
+              <rect x="40" y="60" width="200" height="80" rx="10" fill="none" stroke="currentColor" stroke-width="3"/>
+              <rect x="240" y="85" width="14" height="30" rx="3" fill="currentColor"/>
+              <rect class="battery-fill" x="50" y="70" width="0" height="60" rx="4"/>
+            </svg>
+          </div>
+          <h3>Storage that outlasts the sun</h3>
+          <p>Ninety megawatt-hours of on-site storage bank surplus solar and wind output, keeping the park's operations powered through every overcast week of the year.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GLOBAL IMPACT (3D GLOBE) ================= -->
+  <section class="impact" id="impact">
+    <div class="container impact__grid">
+      <div class="impact__copy">
+        <span class="section-eyebrow">Global impact</span>
+        <h2 class="reveal-up">One blueprint.<br>Nine cities building it.</h2>
+        <p class="reveal-up">OnePark's water, energy, and sensor systems were published as an open reference design in 2024. Nine city governments are now adapting it for their own reclaimed land.</p>
+        <ul class="impact__list">
+          <li class="reveal-up"><span>Rotterdam, NL</span><em>Groundbreaking 2026</em></li>
+          <li class="reveal-up"><span>Nairobi, KE</span><em>Design phase</em></li>
+          <li class="reveal-up"><span>Busan, KR</span><em>Groundbreaking 2027</em></li>
+          <li class="reveal-up"><span>Medellín, CO</span><em>Feasibility study</em></li>
+        </ul>
+        <a href="#" class="text-link reveal-up">Read the open reference design →</a>
+      </div>
+      <div class="impact__globe-wrap reveal-up">
+        <canvas id="globeCanvas" aria-label="Rotating 3D globe showing partner city locations" role="img"></canvas>
+        <div class="impact__globe-caption">Drag to rotate</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRESS ================= -->
+  <div class="press-band" aria-label="As referenced by">
+    <div class="press-band__track">
+      <span>Urban Futures Review</span><span>The Climate Ledger</span><span>Field &amp; Systems Quarterly</span><span>Municipal Design Journal</span><span>Groundwork Magazine</span>
+      <span>Urban Futures Review</span><span>The Climate Ledger</span><span>Field &amp; Systems Quarterly</span><span>Municipal Design Journal</span><span>Groundwork Magazine</span>
+    </div>
+  </div>
+
+  <!-- ================= COMMUNITY ================= -->
+  <section class="community" id="community">
+    <div class="container">
+      <div class="section-head section-head--light">
+        <span class="section-eyebrow">Community</span>
+        <h2 class="reveal-up">Built with the people<br>who use it.</h2>
+      </div>
+
+      <div class="community__grid">
+        <article class="community__card reveal-up community__card--large">
+          <span class="community__tag">Education</span>
+          <h3>School Field Program</h3>
+          <p>Over 400 classes visit each spring for hands-on units on watershed health, native pollinators, and renewable systems — designed alongside local teachers, not just for them.</p>
+          <a href="#" class="text-link">See the curriculum →</a>
+        </article>
+        <article class="community__card reveal-up">
+          <span class="community__tag">Volunteering</span>
+          <h3>Trail &amp; Habitat Corps</h3>
+          <p>1,300 volunteers logged 18,000 hours last year restoring wetland edges and maintaining native plantings.</p>
+        </article>
+        <article class="community__card reveal-up">
+          <span class="community__tag">Research</span>
+          <h3>Open Field Station</h3>
+          <p>Independent researchers can apply for access to the sensor mesh and long-term ecological datasets, free of charge.</p>
+        </article>
+        <article class="community__card reveal-up">
+          <span class="community__tag">Events</span>
+          <h3>Seasonal Gatherings</h3>
+          <p>Solstice lantern walks, harvest markets, and dawn chorus birdwatching — over 60 community events a year.</p>
+        </article>
+        <article class="community__card reveal-up community__card--large">
+          <span class="community__tag">Families</span>
+          <h3>Kids Discovery Zone</h3>
+          <p>A dedicated acre where children learn through play — composting stations, a pollinator maze, and a build-your-own-turbine table designed with a local children's museum.</p>
+          <a href="#" class="text-link">Plan a family visit →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GALLERY ================= -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-eyebrow">Gallery</span>
+        <h2 class="reveal-up">Seen through<br>every season.</h2>
+      </div>
+      <div class="gallery__grid" id="galleryGrid">
+        <!-- tiles injected by JS -->
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Gallery image viewer">
+      <button class="lightbox__close" id="lightboxClose" aria-label="Close image viewer">
+        <svg width="20" height="20" viewBox="0 0 20 20"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <button class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image">
+        <svg width="16" height="16" viewBox="0 0 16 16"><path d="M10 2 4 8l6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="lightbox__stage">
+        <div class="lightbox__figure" id="lightboxFigure"></div>
+        <p class="lightbox__caption" id="lightboxCaption"></p>
+      </div>
+      <button class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next image">
+        <svg width="16" height="16" viewBox="0 0 16 16"><path d="M6 2l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONIALS ================= -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-head section-head--light">
+        <span class="section-eyebrow">Visitors &amp; partners</span>
+        <h2 class="reveal-up">What people notice first.</h2>
+      </div>
+
+      <div class="testimonial-carousel" id="testimonialCarousel">
+        <div class="testimonial-track" id="testimonialTrack">
+          <!-- slides injected by JS -->
+        </div>
+        <div class="testimonial-controls">
+          <button class="carousel-btn" id="testimonialPrev" aria-label="Previous testimonial">
+            <svg width="14" height="14" viewBox="0 0 16 16"><path d="M10 2 4 8l6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="testimonial-dots" id="testimonialDots"></div>
+          <button class="carousel-btn" id="testimonialNext" aria-label="Next testimonial">
+            <svg width="14" height="14" viewBox="0 0 16 16"><path d="M6 2l6 6-6 6" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="faq" id="faq">
+    <div class="container container--narrow">
+      <div class="section-head">
+        <span class="section-eyebrow">Good to know</span>
+        <h2 class="reveal-up">Frequently asked.</h2>
+      </div>
+
+      <div class="accordion" id="accordion">
+        <!-- items injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="contact" id="contact">
+    <div class="container contact__grid">
+      <div class="contact__info">
+        <span class="section-eyebrow">Visit</span>
+        <h2 class="reveal-up">Plan your trip<br>to OnePark.</h2>
+        <p class="reveal-up">Open every day from sunrise to sunset. Entry is free; a few ticketed programs support the research campus.</p>
+
+        <ul class="contact__details">
+          <li><strong>Address</strong><span>1 Meridian Way, Riverbend District</span></li>
+          <li><strong>Hours</strong><span>6:00 AM – 9:00 PM, daily</span></li>
+          <li><strong>Transit</strong><span>Riverbend Line, Meridian stop — 2 min walk</span></li>
+        </ul>
+
+        <div class="contact__map" aria-hidden="true">
+          <svg viewBox="0 0 400 220">
+            <path d="M0,180 C80,150 120,190 200,160 C280,130 320,170 400,140" stroke="currentColor" stroke-width="2" fill="none" opacity="0.3"/>
+            <path d="M0,120 C90,100 140,140 220,110 C300,80 340,110 400,90" stroke="currentColor" stroke-width="2" fill="none" opacity="0.2"/>
+            <circle cx="220" cy="120" r="7" fill="var(--lime)"/>
+            <circle cx="220" cy="120" r="16" fill="none" stroke="var(--lime)" stroke-width="2" class="pulse-ring"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="contact__form-wrap reveal-up">
+        <h3>Join the newsletter</h3>
+        <p>One email a month: what's blooming, what's new, and what's opening next.</p>
+        <form id="newsletterForm" novalidate>
+          <div class="field">
+            <label for="nlName">Name</label>
+            <input type="text" id="nlName" name="name" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="nlEmail">Email</label>
+            <input type="email" id="nlEmail" name="email" required autocomplete="email">
+            <span class="field__error" id="nlEmailError" role="alert"></span>
+          </div>
+          <div class="field field--radio">
+            <span class="field__legend">Interests</span>
+            <div class="chip-group">
+              <label class="chip"><input type="checkbox" name="interest" value="events"><span>Events</span></label>
+              <label class="chip"><input type="checkbox" name="interest" value="volunteering"><span>Volunteering</span></label>
+              <label class="chip"><input type="checkbox" name="interest" value="research"><span>Research</span></label>
+              <label class="chip"><input type="checkbox" name="interest" value="education"><span>Education</span></label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn--solid btn--full">
+            <span>Subscribe</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <a href="#hero" class="footer__logo">
+        <svg width="40" height="40" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" stroke-width="6"/>
+          <circle cx="50" cy="50" r="16" fill="currentColor"/>
+        </svg>
+        <span>OnePark</span>
+      </a>
+      <p class="footer__tagline">A living system, five hundred acres wide.</p>
+    </div>
+
+    <div class="footer__columns">
+      <div class="footer__col">
+        <h4>Explore</h4>
+        <a href="#map">Park Map</a>
+        <a href="#sustainability">Systems</a>
+        <a href="#ecosystem">Ecosystem</a>
+        <a href="#innovation">Innovation</a>
+      </div>
+      <div class="footer__col">
+        <h4>Get involved</h4>
+        <a href="#community">Volunteer</a>
+        <a href="#community">Research access</a>
+        <a href="#community">School programs</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer__col">
+        <h4>Visit</h4>
+        <a href="#contact">Hours &amp; directions</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#testimonials">Stories</a>
+        <a href="#contact">Newsletter</a>
+      </div>
+      <div class="footer__col footer__col--newsletter">
+        <h4>Stay rooted</h4>
+        <p>Monthly notes from the field team.</p>
+        <form class="footer__mini-form" id="footerMiniForm">
+          <input type="email" placeholder="you@email.com" aria-label="Email address" required>
+          <button type="submit" aria-label="Subscribe">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© <span id="yearNow"></span> OnePark. All growth reserved.</p>
+      <div class="footer__socials">
+        <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg></a>
+        <a href="#" aria-label="X (Twitter)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
+        <a href="#" aria-label="LinkedIn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.7"/><line x1="8" y1="10" x2="8" y2="17" stroke="currentColor" stroke-width="1.7"/><circle cx="8" cy="7" r="1" fill="currentColor"/><path d="M12 17v-4.5c0-1.5 1-2.5 2.3-2.5 1.3 0 2.2 1 2.2 2.5V17" stroke="currentColor" stroke-width="1.7"/></svg></a>
+      </div>
+      <button class="footer__lang" id="a11yToggle" aria-haspopup="true" aria-expanded="false" aria-controls="a11yPanel">Accessibility</button>
+    </div>
+  </div>
+</footer>
+
+<!-- Accessibility panel -->
+<div class="a11y-panel" id="a11yPanel" hidden>
+  <h4>Accessibility settings</h4>
+  <label class="a11y-row"><span>Reduce motion</span><input type="checkbox" id="reduceMotionToggle"></label>
+  <label class="a11y-row"><span>High contrast</span><input type="checkbox" id="highContrastToggle"></label>
+  <label class="a11y-row"><span>Larger text</span><input type="checkbox" id="largeTextToggle"></label>
+  <button class="a11y-panel__close" id="a11yClose" aria-label="Close accessibility panel">Done</button>
+</div>
+
+<!-- Toast / notifications -->
+<div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+<!-- Offline banner -->
+<div class="offline-banner" id="offlineBanner" hidden>You're offline — some content may be out of date.</div>
+
+<!-- Back to top -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top" hidden>
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 13V3M3 8l5-5 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<!-- Ambient soundscape toggle -->
+<button class="ambient-toggle" id="ambientToggle" aria-pressed="false" aria-label="Play ambient park soundscape">
+  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" class="ambient-toggle__icon">
+    <path d="M4 10v4h4l5 5V5L8 10H4Z" fill="currentColor"/>
+    <path class="ambient-wave ambient-wave--1" d="M16.5 9a5 5 0 0 1 0 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <path class="ambient-wave ambient-wave--2" d="M19 6.5a9 9 0 0 1 0 11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+  <span class="ambient-toggle__label">Park sounds</span>
+</button>
+
+<!-- Keyboard shortcuts help -->
+<div class="shortcuts-panel" id="shortcutsPanel" hidden>
+  <h4>Keyboard shortcuts</h4>
+  <div class="shortcuts-row"><kbd>/</kbd><span>Search</span></div>
+  <div class="shortcuts-row"><kbd>T</kbd><span>Toggle theme</span></div>
+  <div class="shortcuts-row"><kbd>G</kbd> <kbd>M</kbd><span>Go to map</span></div>
+  <div class="shortcuts-row"><kbd>A</kbd><span>Toggle park sounds</span></div>
+  <div class="shortcuts-row"><kbd>Esc</kbd><span>Close panels</span></div>
+  <div class="shortcuts-row"><kbd>?</kbd><span>Toggle this panel</span></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
